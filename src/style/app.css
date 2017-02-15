@@ -1,0 +1,23 @@
+// styles in src/style directory are applied to the whole page
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+@import '~clarity-ui/clarity-ui.min.css';
+
+
+html, body {
+	margin:0;
+	color:#000000;
+    background-color: red!important;
+    height:100%;
+}
+.priority {
+	padding-left:2px;
+}
+.card-block {
+	background-color:#FFF;
+}
+
+.404-image {
+	width:550px;
+	height:auto;
+}

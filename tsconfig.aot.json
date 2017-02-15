@@ -19,6 +19,7 @@
     "./src/**/*.module.ts",
     "./src/*.d.ts"
   ],
+
   "angularCompilerOptions": {
     "debug": false
   },

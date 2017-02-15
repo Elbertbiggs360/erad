@@ -1,2 +1,64 @@
-<h3>Home Component</h3>
-<p>Welcome to Angular Seed</p>
+<app-header [authUser]="authUser"></app-header>
+
+<div class="container full-page">
+	<div *ngIf!="allTasks" >
+	    <div class="card list-unstyled">
+	    <img class="404-image" src="../img/ucc.png">
+	      <div class="card list-unstyled">
+	    	<div class="card-block">
+	    		You seem to have no access.<a [routerLink]="['/login']"> Sign in</a> again to access the tasks 😌
+	    	</div>
+	      </div>
+	    </div>
+	</div>
+	<div *ngIf="allTasks">
+
+		<create-task [authUser]="authUser" ></create-task>
+
+		<div class="feed">
+		  <div class="card list-unstyled"  *ngFor="let task of allTasks">
+			<div [class]="priority">
+			  <div class="card-block">
+			  	<div class="card-title">
+			      <button md-button (click)="openDialog()"><h4 class="card-title">{{task.taskName}}</h4></button>
+			      {{task.description}}
+				    <clr-dropdown class="complete-button right" [clrMenuPosition]="'bottom-right'" [clrCloseMenuOnItemClick]="false">
+					    <button clrDropdownToggle class="complete-button right dropdown-toggle">
+					        <clr-icon shape="menu"></clr-icon>
+					        <clr-icon shape="caret down"></clr-icon>
+					    </button>
+					    <div class="dropdown-menu">
+					        <h4 class="dropdown-header">Dropdown header</h4>
+					        <a href="..." class="dropdown-item active">Reassign</a>
+					        <a href="#" (click)="openDialog()" class="dropdown-item disabled">Attach Document</a>
+					        <div class="dropdown-divider"></div>
+					        <a href="..." class="dropdown-item">Delete</a>
+					    </div>
+					</clr-dropdown>
+			    </div>
+			    <div class ="container inner">
+			      <div class="card-block">
+			      	<div class="progress top" color="primary">
+                          <progress value="35" max="100"></progress>
+                          <md-progress-bar
+					          [attr.color]="color"
+					          [value]="value"
+					          [bufferValue]="bufferValue">
+					      </md-progress-bar>
+                      </div>
+				    <div class="details">
+				    	<a [routerLink]="['/category', task.category]" class="label label-purple clickable">{{task.category}}</a>
+				      <p class="card-text">{{task.description}}</p>
+				      <!-- <md-progress-spinner mode="determinate" [value]="value" [color]="color" ></md-progress-spinner> -->
+				      <p class="card-text">/ {{task.created_by}}</p>
+				    </div>
+				  </div>
+
+				</div>
+			  </div>
+			<div>
+		  </div>
+		</div>
+	</div>
+</div>
+

@@ -1,42 +1,54 @@
 import { NgModule } from '@angular/core'
-import { RouterModule } from '@angular/router';
-import { rootRouterConfig } from './app.routes';
-import { AppComponent } from './app.component';
-import { GithubService } from './github/shared/github.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
-
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-import { RepoBrowserComponent } from './github/repo-browser/repo-browser.component';
-import { RepoListComponent } from './github/repo-list/repo-list.component';
-import { RepoDetailComponent } from './github/repo-detail/repo-detail.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ContactComponent } from './contact/contact.component';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { ClarityModule } from 'clarity-angular';
+import { MaterialModule } from '@angular/material';
+
+
+import { rootRouterConfig } from './app.routing';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home';
+import { AboutComponent } from './about';
+import {HeaderComponent} from './header';
+import { LoginComponent } from './login';
+import { CreateTaskComponent } from './create-task';
+
+
+import { TaskSearchService } from './shared/task-search.service';
+import { TaskService } from './shared/task.service';
+import { AuthService } from './shared/auth.service';
+import { AuthGuard } from './shared/auth.guard';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AboutComponent,
-    RepoBrowserComponent,
-    RepoListComponent,
-    RepoDetailComponent,
-    HomeComponent,
-    ContactComponent
-  ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(rootRouterConfig, { useHash: true })
+    rootRouterConfig,
+    ClarityModule.forRoot(),
+    MaterialModule.forRoot()
+  ],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    AboutComponent,
+    LoginComponent,
+    HeaderComponent,
+    CreateTaskComponent
   ],
   providers: [
-    GithubService
+    TaskSearchService,
+    TaskService,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [ AppComponent ]
 })
+
 export class AppModule {
 
 }

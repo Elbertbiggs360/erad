@@ -1,0 +1,106 @@
+<div class="create">
+  <div class="list-unstyled">
+	<div class="card-block">
+		<div class ="container inner">
+		    <div class="card-text">
+
+			    <div class='showHide'>
+				    <input type="checkbox" id="toggle" />
+				    <label for="toggle">
+				        <span class='expand'>
+				            Create Task
+				            <span class="changeArrow arrow-up"><clr-icon shape="close"></clr-icon></span>
+				            <span class="changeArrow arrow-dn"><clr-icon shape="tasks"></clr-icon></span>
+				        </span>
+				    </label>
+				    <div *ngIf="loading" class="progress top" color="primary">
+                          <progress value="35" max="100"></progress>
+                          <md-progress-bar
+					          [attr.color]="color"
+					          mode="indeterminate">
+					      </md-progress-bar>
+                    </div>
+				    <div class="fieldsetContainer">
+
+						<form class="login compact" *ngIf="authUser" name="form" (ngSubmit)="onSubmit()" #loginForm="ngForm" novalidate>
+						    <section class="form-block">
+						        <label>{{today | date:'y-MM-dd:hh-mm-ss'}}</label>
+						        <div class="form-group">
+						            <label for="create-taskName">Task Name</label>
+						            <input name="taskName" id="create-taskName" [(ngModel)]="model.taskName" #taskName="ngModel" required  size="45">
+						            <div class="toggle-switch">
+									    <input type="checkbox" id="priority-toggle" name="priority-toggle"  [(ngModel)]="model.priority" #priority="ngModel">
+									    <label for="priority-toggle">High Priority</label>
+									</div>
+						        </div>
+						        <div class="form-group">
+								    <label for="create-assigned_to">Assign To</label>
+								    <div class="select">
+								        <select placeholder="Assign to" id="create-assigned_to" [(ngModel)]="model.assigned_to" name="Assignee" #assigned_to="ngModel" required>
+								            <option [value]="authUser[0]._id" selected>
+											    <span class="avatar"><img src="https://lh3.googleusercontent.com/Z9KBWPZkAfrafL_x8uA5Ugxvuz1AdxuvhTZO815a-vahgVzdmWkJm1GY5xTHSAeDQL1PVCkV1P7PAtK9UXvnxedvXWyA0FSOuyAUN-6H483Re6gMrxyHdiiGwDLF1G5y3goFKsEPwHZaV-ZM5cDFatdySXFCt3r-u1hQdLboBNA7toKItVq0ihs2sv47CnRYoWOHknWdHYex4tBTOoj8LQry_Ris5THNaeec3Cmq11frV8saMvEBUuGSzLRqyVhyjY2B3xLK34mMCMAxG_xe7m-5LfNJr92Qm5Cbk3WY4IMTOca_HRPtWB31Ombz2JmgaTkRy7v5HpRiTJNFZjSqj00EQtfzGZp8kpPJfaEgIWnkAcQI8BGE9VeP6S3tvSTuYygnXyMCLBdnqoGE4FEWZRSS5-4zhxXhRxKvivVtQi15zAoKBerTnLhRyPWKw0U9dZLONi_kZV6FInTocH5KU8r4JbbotLitNKiIoHUNNhUR7sVp72OBMVD54o9-yiW9XhFh-WqJKHUnzD3ATCfL__qmZB1NAsG5WgZTO4WHAmBFEBNjAYyPKe6NoedwRY2Uqmu9viyCTL27qe2YWEc3Al5S64BsmxAR1Y8BayFl5awz-kZ6K4FOjA=w491-h654-no" alt="Me"></span>
+											    <span>Me</span>
+											</option>
+											<span  *ngIf="authUser[0].subjects">
+												<option *ngFor="let user of authUser" [value]="user.subjects._id">
+											    	<span class="avatar"><img src="https://lh3.googleusercontent.com/Z9KBWPZkAfrafL_x8uA5Ugxvuz1AdxuvhTZO815a-vahgVzdmWkJm1GY5xTHSAeDQL1PVCkV1P7PAtK9UXvnxedvXWyA0FSOuyAUN-6H483Re6gMrxyHdiiGwDLF1G5y3goFKsEPwHZaV-ZM5cDFatdySXFCt3r-u1hQdLboBNA7toKItVq0ihs2sv47CnRYoWOHknWdHYex4tBTOoj8LQry_Ris5THNaeec3Cmq11frV8saMvEBUuGSzLRqyVhyjY2B3xLK34mMCMAxG_xe7m-5LfNJr92Qm5Cbk3WY4IMTOca_HRPtWB31Ombz2JmgaTkRy7v5HpRiTJNFZjSqj00EQtfzGZp8kpPJfaEgIWnkAcQI8BGE9VeP6S3tvSTuYygnXyMCLBdnqoGE4FEWZRSS5-4zhxXhRxKvivVtQi15zAoKBerTnLhRyPWKw0U9dZLONi_kZV6FInTocH5KU8r4JbbotLitNKiIoHUNNhUR7sVp72OBMVD54o9-yiW9XhFh-WqJKHUnzD3ATCfL__qmZB1NAsG5WgZTO4WHAmBFEBNjAYyPKe6NoedwRY2Uqmu9viyCTL27qe2YWEc3Al5S64BsmxAR1Y8BayFl5awz-kZ6K4FOjA=w491-h654-no" alt="{{user.subjects.first_name}}"></span>
+											    	<span>{{user.subjects.first_name}} {{user.subjects.last_name}}</span>
+												</option>
+											</span>
+								        </select>
+								    </div>
+								</div>
+								<div class="form-group">
+						            <label>Category</label>
+						            <div class="radio-inline">
+						                <input type="radio" name="Category 1" id="cat_1" checked #category="ngModel" [(ngModel)]="model.category">
+						                <label for="cat_1">Category 1</label>
+						            </div>
+						            <div class="radio-inline">
+						                <input type="radio" name="Category 2" id="cat_2" disabled>
+						                <label for="cat_1">Category 2</label>
+						            </div>
+						        </div>
+						        <div class="form-group">
+						            <label for="create-duration">Duration</label>
+						            <md-slider
+									    [disabled]="disabled"
+									    [invert]="invert"
+									    [max]="max"
+									    [min]="min"
+									    [step]="step"
+									    [thumb-label]="thumbLabel"
+									    [tick-interval]="tickInterval"
+									    [value]="value"
+									    [vertical]="vertical"
+									    [(ngModel)]="model.duration"
+									    #duration = "ngModel"
+									    name="duration"
+									    id="create-duration">
+									</md-slider>
+						        </div>
+						        <div class="form-group">
+						            <label for="create-description">Description</label>
+						            <textarea name="description" [(ngModel)]="model.description" #description="ngModel" id="create-description" rows="5">Go to the 3rd floor and pick some items</textarea>
+						        </div>
+						        <div class="form-group">
+						            <label for="create-start-date">Start Date</label>
+						        	<input type="date" name="start_date" id="create-start-date"  [(ngModel)]="model.start_date" #start_date="ngModel">
+						        	<label for="create-finish-date">Finish Date</label>
+						        	<input type="date" name="finish_date" id="create-finish-date"  [(ngModel)]="model.finish_date" #finish_date="ngModel">
+						       	</div>
+						       	<input type="text" name="created_by" [value]="authUser[0]._id"  id="create-created_by"  [(ngModel)]="model.created_by" #created_by="ngModel" hidden="hidden" >
+						    </section>
+						    <div class="card-footer">
+						        <button type="submit" class="btn btn-primary" >Create Task</button>
+						    </div>
+						</form>
+				    </div>
+
+				</div>
+
+		    </div>
+	    </div>
+	</div>
+  </div>
+</div>
