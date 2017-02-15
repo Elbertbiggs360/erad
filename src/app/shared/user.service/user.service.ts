@@ -9,7 +9,7 @@ import { User } from '../user';
 @Injectable()
 export class UserService {
 
-    private getUserUrl = 'http://localhost:8080/user';
+    private getUserUrl = 'http://10.1.10.54:8080/user';
     public authUser: User[];
     private id: any;
     public token: string;

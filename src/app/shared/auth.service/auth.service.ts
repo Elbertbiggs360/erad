@@ -8,7 +8,7 @@ import { User } from '../user';
 @Injectable()
 export class AuthService {
 	
-	private authUrl = 'http://localhost:8080/authenticate';
+	private authUrl = 'http://10.1.10.54:8080/authenticate';
 
 	public token: string;
 

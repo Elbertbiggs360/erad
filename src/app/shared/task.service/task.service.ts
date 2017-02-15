@@ -9,9 +9,9 @@ import { Task } from '../task';
 
 @Injectable()
 export class TaskService {
-  public tasksUrl = 'http://localhost:8080/viewTasks';
-  public addTasksUrl = 'http://localhost:8080/createTask';
-  public searchTasksUrl = 'http://localhost:8080/searchTask';
+  public tasksUrl = 'http://10.1.10.54:8080/viewTasks';
+  public addTasksUrl = 'http://10.1.10.54:8080/createTask';
+  public searchTasksUrl = 'http://10.1.10.54:8080/searchTask';
   private token: string;
   private id: string;
 
